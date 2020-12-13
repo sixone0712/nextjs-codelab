@@ -1,0 +1,67 @@
+.card-list-container {
+  width: $full-w;
+  height: $full-h;
+  background-color: $bd-gray;
+
+  // card-list-container wrapper
+  &.wrapper {
+    margin: 0 auto;
+    width: 860px;
+    height: $full-h;
+    background-color: $white;
+    border-left: 1px solid $bd-gray;
+    border-right: 1px solid $bd-gray;
+    padding: 20px;
+
+    // .card {
+    //   display: inline-block;
+    //   box-sizing: border-box;
+    //   border: 1px solid $bd-gray;
+    //   width: 200px;
+    //   height: 300px;
+    //   border-radius: 5px;
+    //   margin-left: 20px;
+
+    //   //.card를 그대로 가져온다.
+    //   &:first-child {
+    //     margin-left: 0;
+    //   }
+    //   &:hover {
+    //     box-shadow: 1px 1px 0 rgba(0, 0, 0.3);
+    //   }
+    // }
+
+    .search-input {
+      width: 200px;
+      height: 40px;
+      padding: 5px 20px;
+    }
+
+    .btn-black {
+      margin-left: 10px;
+      width: 100px;
+      height: 50px;
+      color: $white;
+      background-color: $black;
+      border-radius: 5px;
+    }
+
+    .card-list {
+      margin-top: 20px;
+      .card {
+        @include card(200px, 200px);
+        //.card를 그대로 가져온다.
+        // &:first-child {
+        &:nth-child(4n + 1) {
+          margin-left: 0;
+        }
+        &:hover {
+          box-shadow: 1px 1px 0 rgba(0, 0, 0.3);
+        }
+        .name {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
