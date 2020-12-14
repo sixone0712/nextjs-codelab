@@ -1,8 +1,20 @@
-const CardComp = ({ idx, name, job, onBtnClick }) => {
+const CardComp = ({ id, name, email, website, onBtnClick }) => {
   return (
-    <div className="card" onClick={() => onBtnClick(idx)}>
-      <div className="name">이름 : {name}</div>
-      <div className="job">직업 : {job}</div>
+    <div className="card" onClick={() => onBtnClick(id)}>
+      <div className={'item'}>
+        <label>Name:</label>
+        <div>{name}</div>
+      </div>
+
+      <div className={'item'}>
+        <label>E-mail:</label>
+        <div>{email}</div>
+      </div>
+
+      <div className={'item'}>
+        <label>Website:</label>
+        <div>{website}</div>
+      </div>
     </div>
   );
 };

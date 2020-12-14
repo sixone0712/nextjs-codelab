@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "_dev": "next dev",
-    "dev": "ts-node-dev --respawn --project tsconfig.server.json server/index.ts",
-    "dev2": "nodemon --exec ts-node --project tsconfig.server.json server/index.ts",
+    "_dev2": "ts-node-dev --respawn --project tsconfig.server.json server/index.ts",
+    "dev": "nodemon --exec ts-node --project tsconfig.server.json server/index.ts",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

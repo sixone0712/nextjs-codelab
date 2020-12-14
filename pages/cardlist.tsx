@@ -1,36 +1,34 @@
+import axios from 'axios';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Card from '../components/Card';
 
 interface InputValue {
   name: string;
-  job: string;
+  email: string;
+  website: string;
 }
 
 const CardListPage = () => {
-  const [inputVal, setInputValue] = useState<InputValue>({ name: '', job: '' });
+  const [inputVal, setInputValue] = useState<InputValue>({
+    name: '',
+    email: '',
+    website: ''
+  });
   const [selectedCard, setSelectedCard] = useState(0);
-  const [cardList, setCardList] = useState([
-    {
-      idx: 1,
-      name: '박찬호',
-      job: '프로그래머'
-    },
-    {
-      idx: 2,
-      name: '박찬호2',
-      job: '프로그래머'
-    },
-    {
-      idx: 3,
-      name: '박찬호3',
-      job: '프로그래머'
-    },
-    {
-      idx: 4,
-      name: '박찬호4',
-      job: '프로그래머'
-    }
-  ]);
+  const [cardList, setCardList] = useState([]);
+
+  const getPostDataByJson = () => {
+    axios({
+      url: 'https://jsonplaceholder.typicode.com/users',
+      method: 'get'
+    })
+      .then(res => setCardList(res.data))
+      .catch(err => console.error(err));
+  };
+
+  useEffect(() => {
+    getPostDataByJson();
+  }, []);
 
   useEffect(() => {
     console.log(selectedCard);
@@ -43,19 +41,24 @@ const CardListPage = () => {
 
   const onButtonClick = index => {
     setSelectedCard(index);
-    const find = cardList.find(list => list.idx === index);
-    setInputValue({ name: find.name, job: find.job });
+    const find = cardList.find(list => list.id === index);
+    setInputValue({
+      name: find.name,
+      email: find.email,
+      website: find.website
+    });
   };
 
   const onEditCard = () => {
     if (selectedCard) {
       setCardList(
         cardList.map(list => {
-          if (list.idx === selectedCard) {
+          if (list.id === selectedCard) {
             return {
               ...list,
               name: inputVal.name,
-              job: inputVal.job
+              email: inputVal.email,
+              website: inputVal.website
             };
           }
           return list;
@@ -65,7 +68,7 @@ const CardListPage = () => {
       alert('Please select a card!');
     }
     setSelectedCard(0);
-    setInputValue({ name: '', job: '' });
+    setInputValue({ name: '', email: '', website: '' });
   };
 
   const onAddCard = () => {
@@ -78,20 +81,21 @@ const CardListPage = () => {
     //   }
     // ]);
     const newValue = {
-      idx: cardList[cardList.length - 1].idx + 1,
+      idx: cardList[cardList.length - 1].id + 1,
       name: inputVal.name,
-      job: inputVal.job
+      email: inputVal.email,
+      website: inputVal.website
     };
     setCardList(cardList.concat(newValue));
     setSelectedCard(0);
-    setInputValue({ name: '', job: '' });
+    setInputValue({ name: '', email: '', website: '' });
   };
   const onDeleteCard = () => {
     if (selectedCard) {
-      setCardList(cardList.filter(list => list.idx !== selectedCard));
+      setCardList(cardList.filter(list => list.id !== selectedCard));
     }
     setSelectedCard(0);
-    setInputValue({ name: '', job: '' });
+    setInputValue({ name: '', email: '', website: '' });
   };
 
   return (
@@ -108,10 +112,18 @@ const CardListPage = () => {
         <input
           type="text"
           className={'search-input'}
-          name={'job'}
-          value={inputVal.job}
+          name={'email'}
+          value={inputVal.email}
           onChange={onChageInputValue}
-          placeholder={'직업'}
+          placeholder={'이메일'}
+        />
+        <input
+          type="text"
+          className={'search-input'}
+          name={'website'}
+          value={inputVal.website}
+          onChange={onChageInputValue}
+          placeholder={'웹사이트'}
         />
         <button className={'btn-black'} onClick={onAddCard}>
           추가
@@ -124,7 +136,7 @@ const CardListPage = () => {
         </button>
         <div className={'card-list'}>
           {cardList.map(list => (
-            <Card {...list} key={list.idx} onBtnClick={onButtonClick} />
+            <Card {...list} key={list.id} onBtnClick={onButtonClick} />
           ))}
         </div>
       </div>
