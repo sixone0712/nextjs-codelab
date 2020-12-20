@@ -65,6 +65,11 @@
             border-top: 0;
           }
         }
+        .item-text {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
     }
   }
