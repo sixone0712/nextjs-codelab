@@ -7,6 +7,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from '../reducer';
+import { wrapper } from '../redux/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -49,6 +50,7 @@ MyApp.getInitialProps = async context => {
 //   return { ...appProps }
 // }
 
+/*
 // react store
 const configureStore = (initialState, options) => {
   const middlewares = []; // 미들웨어 react-thunk나 react-saga 등등
@@ -65,3 +67,6 @@ const configureStore = (initialState, options) => {
 
 // store는 withRdux를 통해 props로 주입
 export default withRedux(configureStore)(MyApp);
+*/
+
+export default wrapper.withRedux(MyApp);

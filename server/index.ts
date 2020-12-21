@@ -29,7 +29,6 @@ app.prepare().then(() => {
       }
     })
   );
-  ß;
 
   // server.get('/detail', (req, res) => {
   //   console.log('/detail');
