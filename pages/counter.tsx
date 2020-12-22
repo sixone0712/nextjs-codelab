@@ -3,8 +3,9 @@ import { RootState } from '../reducer';
 import { countMinusAction, countPlusAction } from '../reducer/count';
 
 const CounterPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // dispatch를 사용하는 hook
   const { count } = useSelector((state: RootState) => {
+    // store의 stare 호출
     return state.count;
   });
 
