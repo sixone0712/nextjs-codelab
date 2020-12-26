@@ -2,6 +2,7 @@
 import type { AppProps /*, AppContext */ } from 'next/app';
 import Head from 'next/head';
 import '../styles/styles.scss';
+import '../styles/styles.css';
 import withRedux from 'next-redux-wrapper';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';

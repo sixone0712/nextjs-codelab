@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, Middleware, StoreEnhancer } from 'redux';
-import rootReducer from '../reducer';
 import { MakeStore, createWrapper } from 'next-redux-wrapper';
+import ReduxThunks from 'redux-thunk';
+import rootReducer, { rootSaga } from '../api';
+import createSagaMiddleware from 'redux-saga';
 
 const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
   if (process.env.NODE_ENV !== 'production') {
@@ -11,7 +13,16 @@ const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
 };
 
 const makeStore: MakeStore<{}> = () => {
-  const store = createStore(rootReducer, {}, bindMiddleware([]));
+  const sagaMiddleware = createSagaMiddleware();
+
+  const store = createStore(
+    rootReducer,
+    {},
+    bindMiddleware([ReduxThunks, sagaMiddleware])
+  );
+
+  store.sagaTask = sagaMiddleware.run(rootSaga);
+
   return store;
 };
 

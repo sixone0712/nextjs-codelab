@@ -33,16 +33,21 @@
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "immer": "^8.0.0",
     "morgan": "^1.10.0",
     "next": "latest",
+    "next-redux-saga": "^4.1.2",
     "next-redux-wrapper": "^6.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3",
+    "redux-thunk": "^2.3.0",
     "sass": "^1.30.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "typesafe-actions": "^5.1.0"
   },
   "devDependencies": {
     "@testing-library/react": "^10.0.1",
